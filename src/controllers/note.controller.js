@@ -30,3 +30,18 @@ const createAll = async(req, res)=>{
 res.status(500).send(err);
     }
 }
+
+const read = async(req, res)=>{
+    try{
+     const notes = await Note.find();
+     if(!notes){
+      return  res.status(404).send("notes not found");
+     }
+     res.status(202).json({
+        note : notes
+     })
+    }
+    catch(err){
+  res.status(500).send(err);
+    }
+}
