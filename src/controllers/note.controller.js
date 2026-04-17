@@ -59,3 +59,26 @@ const readOne = async(req, res)=>{
     }
 }
 
+
+
+
+const update = async(req, res)=>{
+    try{
+const update = await Note.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {new : true , runValidators : true});
+
+
+    if(!update){
+      return  res.status(400).json({msg : "note not found "})
+    }
+ res.status(200).json({
+    msg : "note updated successfully",
+    note : update
+ })
+    }
+    catch(err){
+res.status(500).send(err);
+    }
+}
