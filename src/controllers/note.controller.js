@@ -82,3 +82,18 @@ const update = await Note.findByIdAndUpdate(
 res.status(500).send(err);
     }
 }
+
+const deleteNote = async(req, res)=>{
+
+
+    try{
+  const deletenote = await Note.findByIdAndDelete(req.params.id);
+  if(!deletenote){
+    return res.status(400).json({msg : 'notes not found'})
+  }
+  res.status(200).json({msg: 'note deleted successfully'})
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
+}
