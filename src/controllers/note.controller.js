@@ -45,3 +45,17 @@ const read = async(req, res)=>{
   res.status(500).send(err);
     }
 }
+
+const readOne = async(req, res)=>{
+    try{
+   const note = req.params.id ;
+   const product = await Note.findById(note);
+    res.status(200).json({
+        note : product
+    })
+    }
+    catch(err){
+    res.status(500).send(err)
+    }
+}
+
