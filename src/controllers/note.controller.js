@@ -15,3 +15,18 @@ const create = async(req, res)=>{
         })
     }
 }
+
+
+const createAll = async(req, res)=>{
+    const note =  req.body;
+    try{
+    const newNotes = await Note.insertMany(note);
+    res.status(202).json({
+        message : "multiple notes added successfully",
+        data : newNotes
+    })
+    }
+    catch(err){
+res.status(500).send(err);
+    }
+}
