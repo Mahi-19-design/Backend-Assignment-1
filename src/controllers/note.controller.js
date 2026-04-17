@@ -97,3 +97,20 @@ const deleteNote = async(req, res)=>{
         res.status(500).send(err);
     }
 }
+
+const deleteMany = async(req, res)=>{
+    try{
+  const ids = req.body.ids;
+  const deletedNotes = await Note.deleteMany({_id: {$in: ids}});
+  if(deletedNotes.deletedCount === 0){
+    return res.status(400).json({msg : 'no notes found to delete'})
+  }
+  res.status(200).json({msg: 'notes deleted successfully', deletedCount: deletedNotes.deletedCount})
+    }
+    catch(err){
+        res.status(500).send(err);
+    }
+}
+
+
+module.exports = {create , createAll , read , readOne , update , deleteNote , deleteMany}
